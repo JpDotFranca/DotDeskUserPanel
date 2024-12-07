@@ -1,0 +1,43 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Build output
+/dist
+/.angular
+/out-tsc
+
+# Generated files
+/node_modules
+/package-lock.json
+/yarn.lock
+/npm-debug.log*
+/yarn-error.log
+/pnpm-debug.log*
+
+# Compiled source maps
+*.js.map
+*.tsbuildinfo
+
+# Testing
+/coverage
+
+# Angular service worker
+/ngsw-config.json
+
+# Environment variables
+.env
+.env.*
+
+# IDE and editor configs
+/.idea
+/.vscode
+*.sublime-workspace
+*.code-workspace
+.DS_Store
+Thumbs.db
+
+# Logs and crash reports
+*.log
+*.log.*
+
+# Mac system files
+.DS_Store
