@@ -1,0 +1,60 @@
+
+    <!-- Sidebar -->
+    <aside class="col sidebar-container">
+        <div class="sidebar-header px-3 py-3 border-bottom">
+          <h5 class="mb-0">Conversas</h5>
+        </div>
+  
+        <!-- Tabs -->
+        <div class="border-bottom px-3 py-2">
+          <ul class="nav nav-tabs flex-nowrap" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'abertas'" (click)="activeTab = 'abertas'">Abertas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'encerradas'" (click)="activeTab = 'encerradas'">Encerradas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="activeTab === 'nova'" (click)="activeTab = 'nova'">Nova conversa</a>
+            </li>
+          </ul>
+        </div>
+  
+        <!-- Conversation list -->
+        <div class="flex-fill overflow-auto conversation-list">
+          <!-- Example conversation item - Consider using *ngFor here -->
+          <div class="conversation-item d-flex align-items-center px-3 py-2 border-bottom">
+            <div class="conversation-avatar mr-2">
+              <img [src]="'https://via.placeholder.com/40'" alt="Avatar" class="rounded-circle">
+            </div>
+            <div class="conversation-info">
+              <div class="conversation-name font-weight-bold">Octávio Octadesk</div>
+              <div class="conversation-lastmsg text-muted">kjhg</div>
+              <div class="conversation-time text-muted small">07 dez</div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Groups -->
+        <div class="border-top px-3 py-3">
+          <h6 class="mb-2">Grupos</h6>
+          <!-- Consider using *ngFor for groups -->
+          <div class="group-item d-flex justify-content-between align-items-center py-1">
+            <span>Grupo de Teste</span>
+            <span class="badge bg-light text-dark">0</span>
+          </div>
+        </div>
+        
+        <!-- Footer user info -->
+        <div class="border-top p-3 d-flex align-items-center">
+          <div class="user-status d-flex align-items-center">
+            <div class="user-initials rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mr-2" style="width:40px;height:40px;">
+              userInitials
+            </div>
+            <div class="user-info">
+              <strong>userName</strong><br>
+              <span class="text-success">userStatus</span>
+            </div>
+          </div>
+        </div>
+      </aside>
