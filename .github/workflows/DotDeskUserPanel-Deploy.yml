@@ -21,27 +21,27 @@ jobs:
           submodules: true
           lfs: false
 
-      # Step 2: Install Node.js and Yarn
+      # Step 2: Install the correct Node.js version
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16' # Ensure this matches your project's Node.js version
+          node-version: '18.19.1' # Use a compatible Node.js version
 
-      # Install Yarn globally
+      # Step 3: Install Yarn
       - name: Install Yarn
         run: npm install -g yarn
 
-      # Step 3: Install project dependencies
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: |
           yarn install # Install dependencies with Yarn
           yarn add @angular/localize --save # Ensure @angular/localize is available
 
-      # Step 4: Build the Angular project
+      # Step 5: Build the Angular project
       - name: Build Angular App
         run: yarn build --prod
 
-      # Step 5: Deploy to Azure Static Web Apps
+      # Step 6: Deploy to Azure Static Web Apps
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
