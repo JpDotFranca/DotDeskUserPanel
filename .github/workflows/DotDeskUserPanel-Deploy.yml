@@ -15,22 +15,44 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
     steps:
+      # Step 1: Checkout the repository
       - uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
+
+      # Step 2: Install Node.js and Yarn
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16' # Ensure this matches your project's Node.js version
+
+      # Install Yarn globally
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      # Step 3: Install project dependencies
+      - name: Install dependencies
+        run: |
+          yarn install # Install dependencies with Yarn
+          yarn add @angular/localize --save # Ensure @angular/localize is available
+
+      # Step 4: Build the Angular project
+      - name: Build Angular App
+        run: yarn build --prod
+
+      # Step 5: Deploy to Azure Static Web Apps
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_DUNE_0CBCDCE10 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for GitHub integrations (e.g., PR comments)
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-          # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "" # Built app content directory - optional
+          api_location: "" # API source code path - optional
+          output_location: "dist/[your-app-name]" # Replace [your-app-name] with your Angular app's output directory
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
