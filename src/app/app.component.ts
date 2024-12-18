@@ -1,51 +1,56 @@
-import { Component } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
-import { ChatSideBarComponent } from './chat-sidebar/chat-sidebar.component';
-import { IconSidebarComponent } from './icon-sidebar/icon-sidebar.component';
+import { Component, inject, ViewChild, type OnInit } from '@angular/core'
 import {
-  FontAwesomeModule,
-  FaIconLibrary,
-} from '@fortawesome/angular-fontawesome';
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+  RouterOutlet,
+  type Event,
+} from '@angular/router'
+import { TitleService } from '@core/services/title.service'
 import {
-  faChartPie,
-  faCoffee,
-  faComments,
-  faHammer,
-  faTicket,
-  faUsers,
-} from '@fortawesome/free-solid-svg-icons';
+  NgProgressComponent,
+  NgProgressModule,
+  type NgProgressRef,
+} from 'ngx-progressbar'
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    FontAwesomeModule,
-    NgbModule,
-    ChatSideBarComponent,
-    IconSidebarComponent,
-  ],
+  imports: [RouterOutlet, NgProgressModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  constructor(private library: FaIconLibrary) {
-    // Register the icon(s) you want to use
-    this.library.addIcons(
-      faCoffee,
-      faComments,
-      faTicket,
-      faUsers,
-      faChartPie,
-      faHammer
-    );
+export class AppComponent implements OnInit {
+  progressRef!: NgProgressRef
+  @ViewChild(NgProgressComponent) progressBar!: NgProgressComponent
+
+  private titleService = inject(TitleService)
+  private router = inject(Router)
+
+  constructor() {
+    this.router.events.subscribe((event: Event) => {
+      this.checkRouteChange(event)
+    })
   }
 
-  activeTab = 'abertas';
-  userName = 'J France';
-  userStatus = 'Disponível';
-  userInitials = 'J F';
+  ngOnInit(): void {
+    this.titleService.init()
+  }
 
-  // Add methods and properties as needed
+  checkRouteChange(routerEvent: Event) {
+    if (routerEvent instanceof NavigationStart) {
+      this.progressBar.start()
+    }
+    if (
+      routerEvent instanceof NavigationEnd ||
+      routerEvent instanceof NavigationCancel ||
+      routerEvent instanceof NavigationError
+    ) {
+      setTimeout(() => {
+        this.progressBar.complete()
+      }, 200)
+    }
+  }
 }

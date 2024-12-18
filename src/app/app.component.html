@@ -1,15 +1,10 @@
-<div class="container-fluid ">
-  <div class="row ">
-    
-    <icon-sidebar></icon-sidebar>
-    <chat-sidebar></chat-sidebar>
-
-    <!-- Main content area -->
-    <main class="col-10 d-flex align-items-center justify-content-center main-area">
-      <div class="text-center text-muted">
-        <h4>Selecione uma conversa para iniciar o atendimento</h4>
-      </div>
-    </main>
-
-  </div>
-</div>
+<ng-progress
+  #progressBar
+  [trickleSpeed]="10"
+  [speed]="10"
+  [spinner]="false"
+  [thick]="true"
+  color="#604ae3"
+  [ease]="'linear'"
+></ng-progress>
+<router-outlet />

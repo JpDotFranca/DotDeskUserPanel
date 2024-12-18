@@ -3,9 +3,13 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "dotdesk-user-panel": {
+    "Lahomes": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,13 +17,15 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/dotdesk-user-panel",
+            "outputPath": "dist/lahomes",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
-              "zone.js"
+              "zone.js",
+              "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
@@ -27,17 +33,24 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "node_modules/swiper/swiper-bundle.min.css",
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jsvectormap/dist/js/jsvectormap.min.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "sweetalert2","moment","dayjs","apexcharts","jsvectormap","jsvectormap/dist/maps/world.js","jsvectormap/dist/maps/russia.js","jsvectormap/dist/maps/canada.js",
+              "jsvectormap/dist/maps/iraq.js","jsvectormap/dist/maps/spain.js","quill-delta","gumshoejs","dropzone","deepmerge"
+            ]
           },
           "configurations": {
             "production": {
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "8mb",
+                  "maximumError": "8mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -45,24 +58,31 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "optimization": {
+                "scripts": true,
+                "styles": {
+                  "minify": true,
+                  "inlineCritical": false
+                }
+              }
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
             }
-          },
+          }, 
           "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "dotdesk-user-panel:build:production"
+              "buildTarget": "Lahomes:build:production"
             },
             "development": {
-              "buildTarget": "dotdesk-user-panel:build:development"
+              "buildTarget": "Lahomes:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -78,6 +98,7 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
@@ -85,12 +106,15 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "0f6bb96e-b0af-40b9-9f86-51facd4ff686"
   }
 }
