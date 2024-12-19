@@ -50,9 +50,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (e.g., PR comments)
           action: 'upload'
           ###### Repository/Build Configurations ######
-          app_location: 'dist/app-dotdesk-panel' # App source code path
+          app_location: 'dist/browser' # App source code path
           api_location: '' # API source code path - optional
-          output_location: ''
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
