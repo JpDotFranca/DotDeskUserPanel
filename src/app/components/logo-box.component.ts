@@ -10,31 +10,19 @@ import { RouterLink } from '@angular/router'
     <div [class]="className">
       <a routerLink="/" class="logo-dark">
         @if (size) {
-          <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm" />
-          <img
-            src="assets/images/logo-dark.png"
-            class="logo-lg"
-            alt="logo dark"
-          />
+        <img src="assets/images/logo.png" class="logo-sm" alt="logo sm" />
+        <img src="assets/images/logo.png" class="logo-lg" alt="logo dark" />
         } @else {
-          <img src="assets/images/logo-dark.png" height="32" alt="logo dark" />
+        <img src="assets/images/logo.png" height="32" alt="logo dark" />
         }
       </a>
 
       <a routerLink="/" class="logo-light">
         @if (size) {
-          <img src="assets/images/logo-sm.png" class="logo-sm" alt="logo sm" />
-          <img
-            src="assets/images/logo-light.png"
-            class="logo-lg"
-            alt="logo light"
-          />
+        <img src="assets/images/logo.png" class="logo-sm" alt="logo sm" />
+        <img src="assets/images/logo.png" class="logo-lg" alt="logo light" />
         } @else {
-          <img
-            src="assets/images/logo-light.png"
-            height="32"
-            alt="logo light"
-          />
+        <img src="assets/images/logo.png" height="32" alt="logo light" />
         }
       </a>
     </div>

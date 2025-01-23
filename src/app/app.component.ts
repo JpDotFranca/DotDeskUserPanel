@@ -9,16 +9,18 @@ import {
   type Event,
 } from '@angular/router'
 import { TitleService } from '@core/services/title.service'
+import { SidebarComponent } from '@layouts/sidebar/sidebar.component'
 import {
   NgProgressComponent,
   NgProgressModule,
   type NgProgressRef,
 } from 'ngx-progressbar'
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgProgressModule],
+  imports: [RouterOutlet, NgProgressModule, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })

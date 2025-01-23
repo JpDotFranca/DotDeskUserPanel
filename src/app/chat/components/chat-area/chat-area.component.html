@@ -93,101 +93,91 @@
   <div class="chat-box">
     <ngx-simplebar class="chat-conversation-list p-3 chatbox-height" #scrollRef>
       @for (msg of messages; track $index) {
-        <li
-          class="d-flex gap-2 clearfix"
-          [ngClass]="{ 'justify-content-end odd': msg.from.id === toUser.id }"
-        >
-          @if (msg.from.id != toUser.id) {
-            <div class="chat-avatar text-center">
-              <img
-                [src]="profileDetail.avatar"
-                alt=""
-                class="avatar rounded-circle"
-              />
-            </div>
-          }
+      <li
+        class="d-flex gap-2 clearfix"
+        [ngClass]="{ 'justify-content-end odd': msg.from.id === toUser.id }"
+      >
+        @if (msg.from.id != toUser.id) {
+        <div class="chat-avatar text-center">
+          <img
+            [src]="profileDetail.avatar"
+            alt=""
+            class="avatar rounded-circle"
+          />
+        </div>
+        }
 
-          <div
-            class="chat-conversation-text"
-            [ngClass]="{ 'ms-0': msg.from.id === toUser.id }"
-          >
-            <div>
-              <p
-                [ngClass]="{
+        <div
+          class="chat-conversation-text"
+          [ngClass]="{ 'ms-0': msg.from.id === toUser.id }"
+        >
+          <div>
+            <p
+              [ngClass]="{
                   'mb-2': true,
                   'text-end': msg.from.id === toUser.id,
                 }"
-              >
-                @if (msg.from.id === toUser.id) {
-                  {{ msg.sentOn | date: 'shortTime' }}
-                  <span class="text-dark fw-medium me-1">you</span>
-                } @else {
-                  <span class="text-dark fw-medium me-1">{{
-                    msg.from.name
-                  }}</span>
-                  {{ msg.sentOn | date: 'shortTime' }}
-                }
-              </p>
-            </div>
-            <div
-              class="d-flex"
-              [ngClass]="
-                msg.from.id === toUser.id
-                  ? 'justify-content-end'
-                  : 'align-items-start'
-              "
             >
               @if (msg.from.id === toUser.id) {
-                <ng-container *ngTemplateOutlet="msgDropdown"></ng-container>
+              {{ msg.sentOn | date : 'shortTime' }}
+              <span class="text-dark fw-medium me-1">you</span>
+              } @else {
+              <span class="text-dark fw-medium me-1">{{ msg.from.name }}</span>
+              {{ msg.sentOn | date : 'shortTime' }}
               }
-              <div class="chat-ctext-wrap d-flex">
-                @if (msg.message.type === 'text') {
-                  <p class="d-flex align-items-center gap-1">
-                    {{ msg.message.value }}
-                  </p>
-                }
-                @if (msg.message.type === 'file') {
-                  @for (item of msg.message.value; track $index) {
-                    @if (isFileType(item) && item.preview) {
-                      <div>
-                        <img
-                          [src]="item.preview"
-                          alt="attachment"
-                          height="84"
-                          width="121"
-                          class="img-thumbnail me-1"
-                        />
-                      </div>
-                    }
-                    @if (isFileType(item) && item.name) {
-                      <div
-                        class="d-flex align-items-center justify-content-center"
-                      >
-                        <div class="flex-shrink-0">
-                          <i class="ri-file-2-fill fs-24 me-1 text-success"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                          <span role="button" class="text-dark">{{
-                            item.name
-                          }}</span>
-                          <p class="mb-0">{{ item.size }} MB</p>
-                        </div>
-                      </div>
-                    }
-                  }
-                }
-              </div>
-              @if (msg.from.id != toUser.id) {
-                <ng-container *ngTemplateOutlet="msgDropdown"></ng-container>
-              }
-            </div>
+            </p>
           </div>
-          @if (msg.from.id == toUser.id) {
-            <div class="chat-avatar text-center">
-              <img [src]="toUser.avatar" alt="" class="avatar rounded-circle" />
+          <div
+            class="d-flex"
+            [ngClass]="
+              msg.from.id === toUser.id
+                ? 'justify-content-end'
+                : 'align-items-start'
+            "
+          >
+            @if (msg.from.id === toUser.id) {
+            <ng-container *ngTemplateOutlet="msgDropdown"></ng-container>
+            }
+            <div class="chat-ctext-wrap d-flex">
+              @if (msg.message.type === 'text') {
+              <p class="d-flex align-items-center gap-1">
+                {{ msg.message.value }}
+              </p>
+              } @if (msg.message.type === 'file') { @for (item of
+              msg.message.value; track $index) { @if (isFileType(item) &&
+              item.preview) {
+              <div>
+                <img
+                  [src]="item.preview"
+                  alt="attachment"
+                  height="84"
+                  width="121"
+                  class="img-thumbnail me-1"
+                />
+              </div>
+              } @if (isFileType(item) && item.name) {
+              <div class="d-flex align-items-center justify-content-center">
+                <div class="flex-shrink-0">
+                  <i class="ri-file-2-fill fs-24 me-1 text-success"></i>
+                </div>
+                <div class="flex-grow-1">
+                  <span role="button" class="text-dark">{{ item.name }}</span>
+                  <p class="mb-0">{{ item.size }} MB</p>
+                </div>
+              </div>
+              } } }
             </div>
-          }
-        </li>
+            @if (msg.from.id != toUser.id) {
+            <ng-container *ngTemplateOutlet="msgDropdown"></ng-container>
+            }
+          </div>
+        </div>
+        @if (msg.from.id == toUser.id) {
+        <div class="chat-avatar text-center">
+          <img [src]="toUser.avatar" alt="" class="avatar rounded-circle" />
+        </div>
+        }
+      </li>
       }
     </ngx-simplebar>
     <div class="bg-light bg-opacity-50 p-2">

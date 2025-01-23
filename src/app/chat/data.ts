@@ -297,86 +297,14 @@ const defaultTo: UserType = {
 }
 
 for (const user of userData) {
-  messages.push(
-    {
-      id: '101',
-      to: defaultTo,
-      from: user,
-      message: {
-        type: 'text',
-        value: "Hey Gaston, how's all going?",
-      },
-      sentOn: addOrSubtractMinutesFromDate(110),
+  messages.push({
+    id: '101',
+    to: defaultTo,
+    from: user,
+    message: {
+      type: 'text',
+      value: "Hey Gaston, how's all going?",
     },
-    {
-      id: '102',
-      to: user,
-      from: defaultTo,
-      message: {
-        type: 'text',
-        value: 'Yeah, everything good!',
-      },
-      sentOn: addOrSubtractMinutesFromDate(110),
-    },
-    {
-      id: '103',
-      to: defaultTo,
-      from: user,
-      message: {
-        type: 'file',
-        value: [
-          { preview: 'assets/images/small/img-4.jpg' },
-          { preview: 'assets/images/small/img-6.jpg' },
-          { preview: 'assets/images/small/img-7.jpg' },
-        ],
-      },
-      sentOn: addOrSubtractMinutesFromDate(110),
-    },
-    {
-      id: '104',
-      to: user,
-      from: defaultTo,
-      message: {
-        type: 'text',
-        value: 'Okk Nice ! Please Send Zip File',
-      },
-      sentOn: addOrSubtractMinutesFromDate(110),
-    },
-    {
-      id: '105',
-      to: defaultTo,
-      from: user,
-      message: {
-        type: 'file',
-        value: [
-          {
-            name: 'admin- dashboard2024.zip',
-            size: 2.3,
-          },
-        ],
-      },
-      sentOn: addOrSubtractMinutesFromDate(110),
-    },
-    {
-      id: '106',
-      to: user,
-      from: defaultTo,
-      message: {
-        type: 'text',
-        value: 'Okk David , Will update the Designs',
-      },
-      sentOn: addOrSubtractMinutesFromDate(20),
-    },
-    {
-      id: '107',
-      to: defaultTo,
-      from: user,
-      message: {
-        type: 'text',
-        value:
-          "Thanks, Gaston. I appreciate your support. Overall, I'm optimistic about our team's performance and looking forward to tackling new challenges in the next quarter.",
-      },
-      sentOn: addOrSubtractMinutesFromDate(10),
-    }
-  )
+    sentOn: addOrSubtractMinutesFromDate(110),
+  })
 }

@@ -211,8 +211,8 @@
      .page-content {
           position: relative;
           transition: all 0.3s ease-in-out;
-          min-height: calc(100vh - $topbar-height);
-          padding: calc($spacer * 1) calc($spacer * 0.5) $footer-height calc($spacer * 0.5);
+          min-height: calc(95vh - $topbar-height);
+          padding: calc($spacer * 0.5) calc($spacer * 0.5) $footer-height calc($spacer * 0.5);
           margin-left: $main-nav-width;
           border-right: 10px solid $main-nav-bg;          
      }
