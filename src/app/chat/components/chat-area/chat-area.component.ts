@@ -7,6 +7,7 @@ import {
   type OnInit,
   type TemplateRef,
 } from '@angular/core'
+import { DotDeskApiService } from '../../../dot-desk-api.service'
 import {
   messages,
   userData,
@@ -52,9 +53,11 @@ import { ChatLeftSideBarComponent } from '../chat-left-side-bar/chat-left-side-b
 })
 export class ChatAreaComponent implements OnInit {
   @Input() profileDetail!: UserType
-  messages = messages
+  messages: any[] = []
   formData!: UntypedFormGroup
   submitted = false
+
+  constructor(private dotDeskApiService: DotDeskApiService) {}
 
   toUser: UserType = {
     id: '112',
@@ -80,6 +83,20 @@ export class ChatAreaComponent implements OnInit {
   scrollRef!: SimplebarAngularComponent
 
   ngOnInit(): void {
+    this.dotDeskApiService.startConnection()
+    this.dotDeskApiService.addReceiveMessageListener(
+      (userId: string, content: string) => {
+        this.messages.push({
+          id: (this.messages.length + 1).toString(),
+          from: { id: userId, name: userId }, // Assuming userId is the name for simplicity
+          to: this.profileDetail,
+          message: { type: 'text', value: content },
+          sentOn: new Date(),
+        })
+        this.scrollToBottom(true)
+      }
+    )
+    this.getChatMessages()
     this.messages = messages.filter(
       (m) =>
         (m.to.id === this.toUser.id && m.from.id === this.profileDetail.id) ||
@@ -89,6 +106,23 @@ export class ChatAreaComponent implements OnInit {
     this.formData = this.formBuilder.group({
       message: ['', [Validators.required]],
     })
+  }
+
+  getChatMessages() {
+    this.dotDeskApiService.getChatMessages(15).subscribe(
+      (data) => {
+        this.messages = data.map((msg) => ({
+          id: msg.id,
+          from: { id: msg.userId, name: msg.userId }, // Assuming userId is the name for simplicity
+          to: this.profileDetail,
+          message: { type: 'text', value: msg.content },
+          sentOn: new Date(msg.timestamp),
+        }))
+      },
+      (error) => {
+        console.error('Error fetching chat messages', error)
+      }
+    )
   }
 
   ngAfterViewInit() {
@@ -138,31 +172,17 @@ export class ChatAreaComponent implements OnInit {
   messageSend() {
     const message = this.formData.get('message')!.value
     if (this.formData.valid && message) {
-      this.messages.push({
-        id: (this.messages.length + 1).toString(),
-        from: this.toUser,
-        to: this.profileDetail,
-        message: { type: 'text', value: message },
-        sentOn: addOrSubtractMinutesFromDate(0.1),
-      })
-      setTimeout(() => {
-        this.messages.push({
-          id: (this.messages.length + 1).toString(),
-          from: this.profileDetail,
-          to: this.toUser,
-          message: { type: 'text', value: 'Server is not connected 😔' },
-          sentOn: addOrSubtractMinutesFromDate(0.1),
-        })
-        this.scrollToBottom(true)
-      }, 1000)
+      this.dotDeskApiService.sendMessage(
+        'room1',
+        this.profileDetail.id,
+        message
+      )
+      this.formData.reset()
     } else {
       this.submitted = true
     }
     setTimeout(() => {
       this.scrollToBottom(true)
-    }, 500)
-    setTimeout(() => {
-      this.formData.reset()
     }, 500)
   }
 
