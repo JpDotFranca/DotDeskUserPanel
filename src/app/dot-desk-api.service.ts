@@ -20,7 +20,10 @@ export class DotDeskApiService {
   startConnection(): void {
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started'))
+      .then(() => {
+        console.log('Connection started')
+        this.joinRoom('general') // Join the room after connection is established
+      })
       .catch((err: string) =>
         console.log('Error while starting connection: ' + err)
       )

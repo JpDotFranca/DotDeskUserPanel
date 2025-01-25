@@ -93,7 +93,7 @@ export class ChatAreaComponent implements OnInit {
           message: { type: 'text', value: content },
           sentOn: new Date(),
         })
-        this.scrollToBottom(true)
+        this.scrollToBottom(false)
       }
     )
     this.getChatMessages()
@@ -137,29 +137,30 @@ export class ChatAreaComponent implements OnInit {
     if (scrollElement) {
       const maxPosition =
         scrollElement.scrollHeight - scrollElement.clientHeight
-      const time = smooth ? 10 : 1 // Adjust the interval time based on smoothness
-      const scrollSpeed = 2 // Change this to control the scroll speed
+      const time = smooth ? 5 : 1 // Adjust the interval time based on smoothness
+      const scrollSpeed = 20 // Increase this to control the scroll speed
       let scrollPosition = scrollElement.scrollTop
 
       const interval = setInterval(function () {
         scrollPosition += scrollSpeed
         scrollElement.scrollTop = scrollPosition
 
-        if (scrollPosition >= maxPosition) {
+        if (true) {
           clearInterval(interval) // Stop when the bottom is reached
         }
       }, time)
     }
+    this.onListScroll()
   }
 
-  // onListScroll() {
-  //   if (this.scrollRef !== undefined) {
-  //     setTimeout(() => {
-  //       this.scrollRef.SimpleBar.getScrollElement().scrollTop =
-  //         this.scrollRef.SimpleBar.getScrollElement().scrollHeight;
-  //     }, 100);
-  //   }
-  // }
+  onListScroll() {
+    if (this.scrollRef !== undefined) {
+      setTimeout(() => {
+        this.scrollRef.SimpleBar.getScrollElement().scrollTop =
+          this.scrollRef.SimpleBar.getScrollElement().scrollHeight
+      }, 100)
+    }
+  }
 
   isFileType(item: any): item is FileType {
     return typeof item === 'object' && ('name' in item || 'preview' in item)
