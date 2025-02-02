@@ -52,8 +52,8 @@ import { ChatLeftSideBarComponent } from '../chat-left-side-bar/chat-left-side-b
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class ChatAreaComponent implements OnInit {
-  @Input() profileDetail!: UserType
   messages: any[] = []
+  @Input() profileDetail!: UserType
   formData!: UntypedFormGroup
   submitted = false
 
@@ -88,8 +88,10 @@ export class ChatAreaComponent implements OnInit {
       (userId: string, content: string) => {
         this.messages.push({
           id: (this.messages.length + 1).toString(),
-          from: { id: userId, name: userId }, // Assuming userId is the name for simplicity
-          to: this.profileDetail,
+          from:
+            userId != this.profileDetail.id ? this.profileDetail : this.toUser,
+          to:
+            userId == this.profileDetail.id ? this.profileDetail : this.toUser,
           message: { type: 'text', value: content },
           sentOn: new Date(),
         })
@@ -174,7 +176,7 @@ export class ChatAreaComponent implements OnInit {
     const message = this.formData.get('message')!.value
     if (this.formData.valid && message) {
       this.dotDeskApiService.sendMessage(
-        'room1',
+        'general',
         this.profileDetail.id,
         message
       )

@@ -97,13 +97,10 @@
         class="d-flex gap-2 clearfix"
         [ngClass]="{ 'justify-content-end odd': msg.from.id === toUser.id }"
       >
+        <!-- Here is the toUser avatar -->
         @if (msg.from.id != toUser.id) {
         <div class="chat-avatar text-center">
-          <img
-            [src]="profileDetail.avatar"
-            alt=""
-            class="avatar rounded-circle"
-          />
+          <img [src]="toUser.avatar" alt="" class="avatar rounded-circle" />
         </div>
         }
 
@@ -172,9 +169,14 @@
             }
           </div>
         </div>
+        <!-- Here is the profile avatar -->
         @if (msg.from.id == toUser.id) {
         <div class="chat-avatar text-center">
-          <img [src]="toUser.avatar" alt="" class="avatar rounded-circle" />
+          <img
+            [src]="profileDetail.avatar"
+            alt=""
+            class="avatar rounded-circle"
+          />
         </div>
         }
       </li>
