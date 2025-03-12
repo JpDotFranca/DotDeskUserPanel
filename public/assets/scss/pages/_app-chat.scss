@@ -29,6 +29,8 @@
 
 .chat-conversation-list {
     list-style: none;
+    // margin-bottom: 20% !important;
+
 
     li {
         margin-bottom: 20px;
@@ -209,7 +211,9 @@
 }
 
 .chatbox-height {
-    max-height: calc(68vh);
+    // max-height: calc(68vh);
+    min-height: 366px;
+    max-height: 366px;
 }
 
 .chat-setting-height {

@@ -95,7 +95,10 @@ export class ChatAreaComponent implements OnInit {
           message: { type: 'text', value: content },
           sentOn: new Date(),
         })
-        this.scrollToBottom(false)
+
+        setTimeout(() => {
+          this.scrollToBottom(true)
+        }, 500)
       }
     )
     this.getChatMessages()
@@ -120,6 +123,8 @@ export class ChatAreaComponent implements OnInit {
           message: { type: 'text', value: msg.content },
           sentOn: new Date(msg.timestamp),
         }))
+
+        this.scrollToBottom(true)
       },
       (error) => {
         console.error('Error fetching chat messages', error)

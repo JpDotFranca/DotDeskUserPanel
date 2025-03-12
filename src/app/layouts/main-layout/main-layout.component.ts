@@ -35,7 +35,8 @@ export class MainLayoutComponent implements OnInit {
   ngOnInit(): void {
     this.store.select('layout').subscribe((data) => {
       this.layoutType = data.LAYOUT
-      document.documentElement.setAttribute('data-bs-theme', data.LAYOUT_THEME)
+      // document.documentElement.setAttribute('data-bs-theme', data.LAYOUT_THEME)
+      document.documentElement.setAttribute('data-bs-theme', 'dark')
 
       document.documentElement.setAttribute('data-menu-color', data.MENU_COLOR)
       document.documentElement.setAttribute(
