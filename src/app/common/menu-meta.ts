@@ -35,15 +35,21 @@ export const MENU_ITEMS: MenuItemType[] = [
     isTitle: true,
   },
   {
-    key: 'reviews',
-    label: 'Reviews',
-    icon: 'ri-chat-quote-line',
-    url: '/',
+    key: 'attenders',
+    label: 'Usuários',
+    icon: 'ri-group-line',
+    url: '/attender-management',
+  },
+  {
+    key: 'tickets',
+    label: 'Tickets',
+    icon: 'ri-survey-line',
+    url: '/tickets',
   },
   {
     key: 'chats',
     label: 'Chats',
-    icon: 'ri-chat-quote-line',
+    icon: 'ri-discuss-line',
     url: '/chats',
   },
 ]

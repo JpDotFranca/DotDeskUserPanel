@@ -27,6 +27,7 @@ import { AuthenticationEffects } from '@store/authentication/authentication.effe
 import { FakeBackendProvider } from '@core/helper/fake-backend'
 import { provideToastr } from 'ngx-toastr'
 import { DecimalPipe } from '@angular/common'
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 const scrollConfig: InMemoryScrollingOptions = {
   scrollPositionRestoration: 'top',
@@ -41,6 +42,7 @@ export const appConfig: ApplicationConfig = {
     FakeBackendProvider,
     CookieService,
     DecimalPipe,
+    provideNgxMask(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes, inMemoryScrollingFeatures),
     provideStore(rootReducer, { metaReducers: [localStorageSyncReducer] }),

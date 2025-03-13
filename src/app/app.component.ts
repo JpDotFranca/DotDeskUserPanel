@@ -15,12 +15,12 @@ import {
   NgProgressModule,
   type NgProgressRef,
 } from 'ngx-progressbar'
-
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NgProgressModule, SidebarComponent],
+  imports: [RouterOutlet, NgProgressModule, SidebarComponent, NgxMaskDirective],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
