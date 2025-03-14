@@ -7,8 +7,12 @@ import * as signalR from '@microsoft/signalr'
   providedIn: 'root',
 })
 export class DotDeskApiService {
-  private apiUrl = 'https://localhost:5051/api'
-  private hubUrl = 'https://localhost:5051/chat'
+  private apiBaseUrl_local = 'https://localhost:5051'
+  private apiBaseUrl =
+    'https://app-dotdesk-api-fbadbfg3g2g2exdm.brazilsouth-01.azurewebsites.net'
+
+  private apiUrl = this.apiBaseUrl + '/api'
+  private hubUrl = this.apiBaseUrl + '/chat'
   private hubConnection: signalR.HubConnection
 
   constructor(private http: HttpClient) {
